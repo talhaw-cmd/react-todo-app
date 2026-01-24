@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 
 const TodoApp = () => {
-  // Initial state: Local storage se data uthao, agar nahi hai toh empty array []
   const [todos, setTodos] = useState(() => {
-    const saved = localStorage.getItem("my_premium_tasks");
+    const saved = localStorage.getItem("my_clean_tasks");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -12,22 +11,14 @@ const TodoApp = () => {
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
-  // Jab bhi 'todos' change honge, automatically local storage mein save ho jayenge
   useEffect(() => {
-    localStorage.setItem("my_premium_tasks", JSON.stringify(todos));
+    localStorage.setItem("my_clean_tasks", JSON.stringify(todos));
   }, [todos]);
 
   const handleAdd = (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
-    
-    const newTodo = { 
-        id: Date.now(), 
-        text: inputValue, 
-        completed: false 
-    };
-    
-    setTodos([newTodo, ...todos]);
+    setTodos([{ id: Date.now(), text: inputValue, completed: false }, ...todos]);
     setInputValue("");
     setShowInput(false);
   };
@@ -37,7 +28,7 @@ const TodoApp = () => {
   };
 
   const deleteTodo = (id, e) => {
-    e.stopPropagation(); // Card click event ko rokne ke liye
+    e.stopPropagation(); // Yeh line sabse important hai
     setTodos(todos.filter(t => t.id !== id));
   };
 
@@ -69,26 +60,25 @@ const TodoApp = () => {
 
       <main className="todo-feed">
         {filtered.map(todo => (
-          <div key={todo.id} className={`todo-item ${todo.completed ? "is-done" : ""}`} onClick={() => toggleStatus(todo.id)}>
-            <div className="todo-content">
+          <div key={todo.id} className={`todo-item ${todo.completed ? "is-done" : ""}`}>
+            {/* Clickable area for status toggle */}
+            <div className="todo-content" onClick={() => toggleStatus(todo.id)}>
               <div className="custom-check">
                 {todo.completed && <span className="check-mark">✓</span>}
               </div>
               <span className="text">{todo.text}</span>
             </div>
+            
+            {/* Independent button for delete */}
             <button className="del-btn" onClick={(e) => deleteTodo(todo.id, e)}>
               Remove
             </button>
           </div>
         ))}
-        {filtered.length === 0 && (
-          <div className="empty-state">
-            <p>Your list is clear. ✨</p>
-          </div>
-        )}
+        {filtered.length === 0 && <div className="empty-state">No tasks found.</div>}
       </main>
 
-      <button className="fab-btn" onClick={() => setShowInput(true)}>+</button>
+      {!showInput && <button className="fab-btn" onClick={() => setShowInput(true)}>+</button>}
 
       {showInput && (
         <div className="modal-overlay">
@@ -98,11 +88,11 @@ const TodoApp = () => {
               <input 
                 autoFocus 
                 type="text" 
-                placeholder="What's your next goal?" 
+                placeholder="What's next?" 
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
               />
-              <div className="hint">Press <strong>Enter</strong> to save task</div>
+              <div className="hint">Press Enter to save</div>
             </form>
           </div>
         </div>

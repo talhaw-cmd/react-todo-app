@@ -1,223 +1,83 @@
 :root {
   --primary: #000000;
-  --bg-app: #ffffff;
   --text-main: #111827;
   --text-dim: #9ca3af;
-  --accent: #f3f4f6;
+  --border: #f3f4f6;
 }
 
 body {
   margin: 0;
-  background-color: var(--bg-app);
+  background-color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 
-.app-container {
-  width: 100%;
-  min-height: 100vh;
-}
+.app-container { width: 100%; min-height: 100vh; }
 
-.main-header {
-  padding: 80px 40px 30px;
-}
+.main-header { padding: 60px 40px 20px; }
+.date-label { font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+.main-header h1 { font-size: 52px; font-weight: 800; margin: 0; letter-spacing: -2px; }
+.stats { color: #6b7280; margin-top: 10px; font-weight: 500; }
 
-.date-label {
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-  margin-bottom: 8px;
-}
-
-.main-header h1 {
-  font-size: 56px;
-  font-weight: 800;
-  letter-spacing: -3px;
-  margin: 0;
-  color: var(--text-main);
-}
-
-.stats {
-  color: #6b7280;
-  font-weight: 500;
-  margin-top: 10px;
-}
-
-/* Tabs */
 .filter-nav {
-  display: flex;
-  gap: 30px;
-  padding: 10px 40px;
-  border-bottom: 1px solid var(--accent);
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(15px);
-  z-index: 10;
+  display: flex; gap: 30px; padding: 10px 40px; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); z-index: 10;
 }
 
 .nav-item {
-  background: none;
-  border: none;
-  padding: 15px 0;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-dim);
-  cursor: pointer;
-  position: relative;
+  background: none; border: none; padding: 15px 0; font-size: 15px; font-weight: 700; color: var(--text-dim); cursor: pointer; position: relative;
 }
 
-.nav-item.active {
-  color: var(--primary);
-}
+.nav-item.active { color: var(--primary); }
+.nav-item.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--primary); }
 
-.nav-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--primary);
-}
-
-/* List */
 .todo-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 30px 40px;
-  border-bottom: 1px solid var(--accent);
-  cursor: pointer;
-  transition: background 0.2s;
+  display: flex; align-items: center; justify-content: space-between; padding: 25px 40px; border-bottom: 1px solid var(--border); transition: 0.2s;
 }
 
-.todo-item:hover {
-  background-color: #fafafa;
-}
+.todo-item:hover { background-color: #fafafa; }
 
-.todo-content {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
+.todo-content { display: flex; align-items: center; flex: 1; cursor: pointer; }
 
 .custom-check {
-  width: 26px;
-  height: 26px;
-  border: 2px solid #e5e7eb;
-  border-radius: 50%;
-  margin-right: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 24px; height: 24px; border: 2px solid #e5e7eb; border-radius: 50%; margin-right: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 
-.is-done .custom-check {
-  background: var(--primary);
-  border-color: var(--primary);
-}
+.is-done .custom-check { background: var(--primary); border-color: var(--primary); }
+.check-mark { color: white; font-size: 12px; }
+.text { font-size: 20px; font-weight: 400; }
+.is-done .text { text-decoration: line-through; color: var(--text-dim); }
 
-.check-mark {
-  color: white;
-  font-size: 14px;
-}
-
-.text {
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--text-main);
-}
-
-.is-done .text {
-  text-decoration: line-through;
-  color: var(--text-dim);
-}
-
+/* --- Updated Remove Button Style --- */
 .del-btn {
-  background: none;
-  border: none;
+  background: #fff1f2;
   color: #ef4444;
-  font-weight: 600;
-  font-size: 14px;
-  opacity: 0;
+  border: 1px solid #fecaca;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.todo-item:hover .del-btn {
-  opacity: 1;
-}
-
-/* FAB */
-.fab-btn {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  width: 65px;
-  height: 65px;
-  background: var(--primary);
+.del-btn:hover {
+  background: #ef4444;
   color: white;
-  border-radius: 50%;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  transition: 0.3s;
+  border-color: #ef4444;
 }
 
-.fab-btn:hover {
-  transform: scale(1.1);
+/* --- Rest of the Design --- */
+.fab-btn {
+  position: fixed; bottom: 40px; right: 40px; width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; border: none; font-size: 30px; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* Modal Overlay */
 .modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: white;
-  z-index: 100;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: fixed; inset: 0; background: white; z-index: 100; padding: 40px; display: flex; flex-direction: column; animation: slideUp 0.3s ease-out;
 }
 
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-.close-modal {
-  align-self: flex-end;
-  border: none;
-  background: var(--accent);
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.modal-content input {
-  width: 100%;
-  border: none;
-  font-size: 48px;
-  font-weight: 800;
-  margin-top: 100px;
-  outline: none;
-  letter-spacing: -2px;
-}
-
-.hint {
-  color: var(--text-dim);
-  margin-top: 25px;
-  font-size: 18px;
-}
-
-.empty-state {
-  padding: 100px 40px;
-  text-align: center;
-  color: var(--text-dim);
-  font-size: 20px;
-}
+.close-modal { align-self: flex-end; border: none; background: var(--border); padding: 10px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; }
+.modal-content input { width: 100%; border: none; font-size: 42px; font-weight: 800; margin-top: 80px; outline: none; letter-spacing: -2px; }
+.hint { color: var(--text-dim); margin-top: 20px; }
+.empty-state { padding: 80px 40px; text-align: center; color: var(--text-dim); font-size: 18px; }
